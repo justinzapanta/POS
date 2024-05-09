@@ -1,0 +1,42 @@
+{% extends 'main/parts/base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %} Products {% endblock %}
+
+{% block body %}
+<body class="bg-slate-100">
+{% endblock %}
+
+{% block content %}
+        <div class="container max-w-full flex flex-col mt-16 pt-4 pl-4">
+            <!--Categories-->
+            <div class="container max-w-full flex">
+                <a class="w-0 h-0" href="#"><div class="border border-gray-300 py-1 px-16 bg-white">
+                    <div class="container max-w-full flex justify-center">
+                        <div class="w-auto h-auto">
+                            <h1 class="text-center font-bold">Pizza</h1>
+                        </div> 
+                    </div>
+                </div></a>
+            </div>
+
+            <!--Products-->
+            <div class="container max-w-full">
+                <div class="">
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    </script>
+{% endblock %}

@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POS</title>
+    <title>{% block title %}POS {% endblock %}</title>
+
     {% block link %}
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock %}
@@ -16,14 +17,13 @@
     <header class="container max-w-full flex px-5 border-b fixed top-0 z-20 bg-white border-b-gray-300">
         <div class="flex-1 flex mb-2">
             <div class="flex mt-2">
-                <img src="{% static 'logo/pizza_logo.png' %}" class="w-12  mr-3" alt="">
-                <h1 class="font-bold text-xl mt-3 mr-6">Pizza Shop</h1>
+                <img src="{% static 'logo/pizza.png' %}" class="w-12  mr-3" alt="">
             </div>
             <div>
                 <form method="POST" class="flex max-w-full">
                     {% csrf_token %}
                     <input type="text" class="rounded-xl mt-3 mr-2 border bg-white w-72  border-gray-300 px-2 py-2" placeholder="Search">
-                    <button type="submit" class="rounded-xl mt-3 px-3 py-1 font-bold bg-slate-900 text-white ">Search</button>
+                    <button type="submit" class="rounded-xl mt-3 px-3 py-1 font-bold bg-button text-white ">Search</button>
                 </form>
             </div>
         </div>
@@ -32,6 +32,41 @@
         </ul>
     </header>
 
+    <div class="container max-w-full flex relative">
+        <div class="container w-72 h-screen z-0 border-r px-8 bg-white border-r-gray-300 mt-16 pt-10">
+            <div class="container max-w-full flex justify-center mb-5">
+                <a href=""><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
+                    <div class="container max-w-full flex justify-center py-1">
+                        <p ><img src="{% static 'icon/dashboard-icon.png' %}" class="w-7 mt-1 ml-2 mb-1 mr-2" alt="Order History"></p>
+                        <div class="container max-w-full flex justify-center">
+                            <h1 class="mt-0.5">Dashboard</h1>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+            
+            <div class="container max-w-full flex justify-center mb-5">
+                <a href="{% url 'products' %}"><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
+                    <div class="container max-w-full flex justify-center py-1">
+                        <p ><img src="{% static 'icon/pizza-icon.png' %}" class="w-6 mr-3 ml-2 mt-1" alt="burger"></p>
+                        <div class="container max-w-full flex justify-center">
+                            <h1 class="mt-0.5">Products</h1>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+
+            <div class="container max-w-full flex justify-center mb-5">
+                <a href=""><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
+                    <div class="container max-w-full flex py-1">
+                        <p ><img src="{% static 'icon/history-icon.png' %}" class="w-5 ml-2 py-1 mr-2" alt="Order History"></p>
+                        <div class="container max-w-full flex justify-center">
+                            <h1 class="mt-0.5">Order History</h1>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+        </div>
     {% block content %}
 
     {% endblock %}

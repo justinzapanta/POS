@@ -5,43 +5,15 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %}
 
+{% block title %} Dashboard {% endblock %}
+
 {% block body %}
 <body class="bg-slate-100">
 {% endblock %}
 
 {% block content %}
-    <div class="container max-w-full flex relative">
-        <div class="container w-72 h-screen z-0 border-r px-8 bg-white border-r-gray-300 mt-16 pt-10">
-            <div class="container max-w-full flex justify-center mb-5">
-                <a href=""><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
-                    <div class="container max-w-full flex justify-center py-1">
-                        <p ><img src="{% static 'icon/dashboard.png' %}" class="w-7 mt-1 mr-2" alt="Order History"></p>
-                        <h1>Dashboard</h1>
-                    </div>
-                </div></a>
-            </div>
-            
-            <div class="container max-w-full flex justify-center mb-5">
-                <a href=""><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
-                    <div class="container max-w-full flex justify-center py-1">
-                        <p ><img src="{% static 'icon/burger.png' %}" class="w-6 mr-3 mt-1" alt="burger"></p>
-                        <h1>Products</h1>
-                    </div>
-                </div></a>
-            </div>
-
-            <div class="container max-w-full flex justify-center mb-5">
-                <a href=""><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
-                    <div class="container max-w-full flex justify-center py-1">
-                        <p ><img src="{% static 'icon/history.png' %}" class="w-5 mr-2" alt="Order History"></p>
-                        <h1>Order History</h1>
-                    </div>
-                </div></a>
-            </div>
-        </div>
-
-        <!--Dash Board-->
-        <div class="container max-w-full mt-16 pt-10 mb-7">
+    <!--Dash Board-->
+        <div class="container max-w-full mt-10 pt-10 mb-7">
             <div class="container max-w-full flex flex-wrap">
                 <div id="total-order" class="border border-gray-300 mb-5 shadow-md w-72 h-52 rounded-xl bg-white ml-4 mr-2">
                     <h1 class="mt-2 ml-2 font-bold">Total Product Sold</h1>
@@ -70,7 +42,10 @@
                 </div>
             </div>
         </div>
+
+    <!--Dont Remove This-->
     </div>
+
 {% endblock %}
 
 

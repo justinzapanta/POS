@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.dashboard, name=('dashboard')),
-    path('products/', views.products, name=('products')),
+    path('products/<str:category>/', views.products, name=('products')),
 
     #Auth
     path('login/', views.login_view, name=('login')),

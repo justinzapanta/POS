@@ -33,43 +33,49 @@
     </header>
 
     <div class="container max-w-full flex relative">
-        <div class="container w-72 h-screen z-0 border-r px-8 bg-white border-r-gray-300 mt-16 pt-10">
-            <div class="container max-w-full flex justify-center mb-5">
-                <a href=""><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
-                    <div class="container max-w-full flex justify-center py-1">
-                        <p ><img src="{% static 'icon/dashboard-icon.png' %}" class="w-7 mt-1 ml-2 mb-1 mr-2" alt="Order History"></p>
-                        <div class="container max-w-full flex justify-center">
-                            <h1 class="mt-0.5">Dashboard</h1>
+        {% block sidebar %}
+            <div class="container w-72 h-screen z-0 border-r px-8 bg-white border-r-gray-300 mt-16 pt-10">
+                <div class="container max-w-full flex justify-center mb-5">
+                    <a href=""><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
+                        <div class="container max-w-full flex justify-center py-1">
+                            <p ><img src="{% static 'icon/dashboard-icon.png' %}" class="w-7 mt-1 ml-2 mb-1 mr-2" alt="Order History"></p>
+                            <div class="container max-w-full flex justify-center">
+                                <h1 class="mt-0.5">Dashboard</h1>
+                            </div>
                         </div>
-                    </div>
-                </div></a>
-            </div>
-            
-            <div class="container max-w-full flex justify-center mb-5">
-                <a href="{% url 'products' %}"><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
-                    <div class="container max-w-full flex justify-center py-1">
-                        <p ><img src="{% static 'icon/pizza-icon.png' %}" class="w-6 mr-3 ml-2 mt-1" alt="burger"></p>
-                        <div class="container max-w-full flex justify-center">
-                            <h1 class="mt-0.5">Products</h1>
+                    </div></a>
+                </div>
+                
+                <div class="container max-w-full flex justify-center mb-5">
+                    <a href="{% url 'products' "pizza" %}"><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
+                        <div class="container max-w-full flex justify-center py-1">
+                            <p ><img src="{% static 'icon/pizza-icon.png' %}" class="w-6 mr-3 ml-2 mt-1" alt="burger"></p>
+                            <div class="container max-w-full flex justify-center">
+                                <h1 class="mt-0.5">Products</h1>
+                            </div>
                         </div>
-                    </div>
-                </div></a>
-            </div>
+                    </div></a>
+                </div>
 
-            <div class="container max-w-full flex justify-center mb-5">
-                <a href=""><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
-                    <div class="container max-w-full flex py-1">
-                        <p ><img src="{% static 'icon/history-icon.png' %}" class="w-5 ml-2 py-1 mr-2" alt="Order History"></p>
-                        <div class="container max-w-full flex justify-center">
-                            <h1 class="mt-0.5">Order History</h1>
+                <div class="container max-w-full flex justify-center mb-5">
+                    <a href=""><div class="container hover:shadow-md w-56 border border-gray-300 text-lg rounded-lg flex">
+                        <div class="container max-w-full flex py-1">
+                            <p ><img src="{% static 'icon/history-icon.png' %}" class="w-5 ml-2 py-1 mr-2" alt="Order History"></p>
+                            <div class="container max-w-full flex justify-center">
+                                <h1 class="mt-0.5">Order History</h1>
+                            </div>
                         </div>
-                    </div>
-                </div></a>
+                    </div></a>
+                </div>
             </div>
-        </div>
+        {% endblock %}
+
+
     {% block content %}
 
     {% endblock %}
+
+
 </body>
 
 {% block script %}

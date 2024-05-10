@@ -38,12 +38,12 @@
                 <!--Products-->
                 <div class="container max-w-full mt-6 pr-80 pl-14 flex flex-wrap">
                     {% for product in products %}
-                        <a href=""><div class="container w-60 relative h-60 mr-2 shadow-lg border mb-6 border-gray-300 rounded-xl bg-white ml-4">
-                            <div class="w-20 h-7 absolute top-0" style="background-color: rgba(0, 0, 0, 0.568);">
+                        <a onclick="add_product(this)" product_name="{{product.product_name}}" product_price="{{product.product_price}}" class="hover:cursor-pointer w-60 h-60 mr-5 mb-6"><div class="container w-60 h-60 relative mr-2 shadow-lg border mb-6 border-gray-300 rounded-xl bg-white ml-4">
+                            <div class="w-20 h-7 absolute rounded-tl-lg rounded-br-md top-0" style="background-color: rgba(0, 0, 0, 0.568);">
                                 <h1 class="font-bold text-center text-white">{{product.product_code}}</h1>
                             </div>
                             <div class="container max-w-full">
-                                <img src="{{ product.product_img.url }}" class="w-screen h-36" alt="">
+                                <img src="{{ product.product_img.url }}" class="w-screen rounded-t-lg h-36" alt="">
                             </div>
                             <div class="container max-w-full px-2">
                                 <h1 class="text-center mt-2 font-bold">{{ product.product_name }}</h1>
@@ -55,22 +55,49 @@
             </div>
         </div>
 
-        <div class="container font-bold fixed top-0 right-0 bg-white w-80 h-screen border pt-2 border-gray-300">
-            <h1 class="mt-16 ml-4 text-xl">Bills</h1>
-            <div class="container w-full px-2 mt-2 h-96 overflow-y-auto">
-                <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quasi nemo quod doloremque nesciunt sit numquam quisquam non, cupiditate atque natus eum ullam. Corporis ad ab quaerat accusantium provident porro tenetur dolorem voluptate aut libero aliquid, fugiat accusamus ut ipsa omnis. Fugit dolores iste, eius sequi inventore, deserunt neque fugiat expedita odit eligendi consequatur quibusdam nihil alias adipisci? Perferendis iusto voluptate ratione ab, suscipit molestias rerum in nam. Tenetur et in, vel aliquam quidem magnam repudiandae explicabo sint rem dolor a recusandae nam corporis quod esse delectus nobis eos sit similique numquam odio soluta libero? Optio accusantium autem temporibus error corrupti provident velit amet atque quam excepturi, mollitia adipisci repellendus libero! Aliquid ratione ad, facilis nemo expedita fugit maxime sapiente odit ducimus nam similique non eligendi quasi earum reiciendis voluptatibus tempora debitis dolorem. Aliquid vero porro quas sit maiores facere ipsum aliquam, alias nemo explicabo consectetur error, voluptas fugit cum beatae nisi iure hic mollitia, incidunt quis cupiditate nihil culpa optio? Iusto, veniam quaerat eum exercitationem laborum dolor nihil a dignissimos perspiciatis tempore quisquam necessitatibus, fugiat consequuntur, modi suscipit. Cumque ratione molestiae perferendis accusamus incidunt. Deserunt quas maxime neque expedita, vero nisi quia perferendis quisquam. Similique vel harum eius necessitatibus libero qui architecto debitis voluptatum! Adipisci officia nam nesciunt molestias quos facere impedit et provident incidunt, fuga repellat? Non quam praesentium ratione! Facilis ipsa id, voluptatem necessitatibus corrupti perspiciatis in exercitationem temporibus quisquam molestias beatae commodi obcaecati nobis delectus qui alias! Corporis natus ea accusantium qui est a quidem. Dolorem accusamus facere neque perferendis ea animi minima cupiditate dolore, voluptatem minus reprehenderit, rem optio at corrupti fugit non. Labore animi accusantium, explicabo minima tempore excepturi vero possimus dolores eligendi, doloremque repellat saepe qui, architecto dolorum dolorem quam totam assumenda quos. Illo earum amet accusamus harum quibusdam perferendis laudantium nostrum non beatae nesciunt enim repellat numquam mollitia vitae dolorum illum cupiditate quam dignissimos rem, quis nemo odit consequatur? Quo nam voluptate esse aliquam! Quod odio explicabo, odit hic, autem pariatur praesentium saepe vitae in molestiae aut animi veniam! Recusandae fugiat quos, ut dolores facilis porro consequuntur omnis enim soluta, similique id, quis dignissimos? Commodi exercitationem minus placeat distinctio dolore molestias, omnis quod autem suscipit sit excepturi beatae nesciunt voluptate repellendus iure sed illum, impedit temporibus esse praesentium culpa qui. Reprehenderit ipsam fugiat ducimus dolorem officia odit veniam repellat nisi amet culpa cupiditate expedita dignissimos quaerat hic ut nobis, illo tenetur sunt optio consequuntur ratione nemo quibusdam placeat. Obcaecati quo neque quibusdam minima ex ullam reiciendis consequatur voluptatibus recusandae, totam commodi libero dolores optio et qui sequi sapiente? Error nulla facere consequatur quis excepturi nobis, expedita nemo, consectetur dolore culpa cum at optio suscipit assumenda adipisci odit iste inventore voluptas maiores dolorum ab iusto maxime explicabo? Error molestiae exercitationem molestias officia? Similique assumenda voluptatibus aliquid quaerat amet dolores non accusamus culpa repellat saepe doloribus eaque, id deserunt, maxime labore et in cum molestiae quia minus quae. Nulla, suscipit voluptas inventore dolor nobis earum minus veniam rerum reprehenderit quos quia vel fuga itaque vero saepe exercitationem odio? Ex nostrum a ut molestiae impedit repellendus veniam, iste quia nesciunt. Accusamus, repudiandae labore repellendus nemo, consectetur optio amet sapiente, tempore officiis nisi expedita quidem. Odit, quibusdam nostrum. Soluta illo numquam, deleniti tenetur libero aut blanditiis praesentium quam nulla quasi voluptas sunt officiis totam inventore natus! Cum quaerat laborum magnam distinctio at beatae iste tempora, earum possimus iure porro, facere consequuntur, optio praesentium magni quas? Necessitatibus rerum, cum cumque aspernatur velit nihil quod vel et soluta enim omnis nostrum at tempora, perferendis inventore! Incidunt voluptates obcaecati, est architecto quo sint quisquam a dolores dolorem saepe omnis illum rerum ut temporibus, sed veritatis atque perspiciatis recusandae officiis hic odit voluptatum corporis sequi. Minus facere libero, officiis praesentium rem alias debitis consequuntur! Ab voluptatem molestiae voluptate debitis molestias sunt omnis at repudiandae repellat numquam hic consequuntur, eveniet fuga sed quos fugiat animi mollitia a qui. Reprehenderit sequi aperiam ex, repellat id dolorem maiores et itaque porro in similique deserunt error dicta reiciendis minus quae corporis atque. Totam ratione sint voluptatibus eum minus. Tempora laborum aliquam omnis deleniti debitis hic ratione, quo fugit dolorem provident assumenda eum non ullam similique quod iure amet esse consectetur veniam dicta aut ex, sint voluptatum. Tenetur, minus? Alias, facilis sunt consequatur quasi perspiciatis accusamus deserunt, aliquam quam iure numquam repellendus necessitatibus voluptatem doloremque veniam fuga? Maiores asperiores, ipsa commodi delectus porro animi. Saepe ipsum dolorum, ducimus culpa odit porro suscipit pariatur laboriosam perspiciatis qui maxime debitis repudiandae deserunt earum possimus? Explicabo blanditiis animi vero culpa ad. Adipisci sequi quos fugit eum quo ipsa ex laboriosam pariatur suscipit tenetur optio sapiente totam maiores non exercitationem quisquam necessitatibus impedit, eaque odit mollitia excepturi nemo dolorem provident molestiae. Consectetur maiores voluptates deleniti voluptas debitis quam numquam et eveniet, aliquid obcaecati distinctio reiciendis, voluptatem quisquam autem adipisci veritatis officiis molestiae ex ipsum ipsam. Molestiae non quae eum suscipit temporibus cumque beatae maxime sit, aliquid laudantium aperiam! Temporibus aliquid consequuntur at non tenetur mollitia, nulla magnam reprehenderit dolorem recusandae, ab ratione possimus impedit animi. Iure corporis voluptas quasi fuga ullam aut quisquam in illum laudantium accusantium sed labore libero neque est omnis repudiandae quam temporibus, quod ex distinctio deserunt! Aperiam iusto ut magnam exercitationem officiis ipsa rerum maiores, aut eveniet facilis obcaecati? Adipisci rem aperiam ipsa voluptas dolores, atque, libero rerum ratione eius maxime voluptate eligendi, necessitatibus quisquam ea quia magnam assumenda ipsum dolor doloremque possimus illum obcaecati soluta perferendis nihil! Odio sit amet, sunt et nemo laboriosam voluptatibus eveniet. Hic labore repellendus optio eligendi nobis accusantium quidem. Adipisci recusandae temporibus eum quibusdam laudantium, amet neque modi commodi ducimus quam quaerat, est, perferendis aperiam tenetur. Aliquam provident non aperiam. Aut architecto, doloremque tempora quasi, ullam libero dolorem vel, aliquam magnam recusandae ut culpa. Suscipit, unde consequatur nesciunt veritatis voluptatum, facilis, praesentium iure incidunt nobis autem qui natus. Rem iusto vitae, iure beatae, delectus sit quaerat, sequi corporis molestias autem repellat? Adipisci labore repellat aliquam, doloremque, quis asperiores a possimus distinctio atque ad inventore error accusamus! Ipsam, pariatur vel?</h1>
-            </div>
-            <h1 class="text-xl mt-2 ml-2 mb-2">Total: </h1>
-            <div class="container max-w-full flex h-10 justify-center ">
-                <button class="px-20 rounded-lg bg-button text-white text-xl"> Order</button>
+        <div class="container fixed top-0 right-0 bg-white w-80 h-screen border pt-2 border-gray-300">
+            <h1 class="mt-16 ml-4 text-xl font-bold">Invoice</h1>
 
+            <div class="container w-full px-2 mt-2 h-96 overflow-y-auto">
+
+                <div id="product-container" class="container max-w-full flex flex-col justify-center">
+
+                </div>
+
+            </div>
+
+            <h1 class="text-xl mt-2 ml-6 font-bold mb-2">Total: </h1>
+            <div class="container max-w-full flex h-10 justify-center ">
+                <button class="px-20 rounded-lg font-bold bg-button text-white text-xl">Order</button>
             </div>
         </div>
 {% endblock %}
 
 {% block script %}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script>
+        function add_product(_this){
+            const product_name = _this.getAttribute('product_name')
+            const product_price = _this.getAttribute('product_price')
+
+            let new_div = document.createElement('div')
+            new_div.classList.add('w-72', 'border-t', 'border-t-gray-300', 'pl-8', 'py-4')
+            new_div.id = product_name
+
+            new_div.innerHTML = `
+                <div class=" flex flex-col">
+                    <h1 class="font-bold">${product_name}</h1>
+                    <div>
+                        <div class="flex container max-w-full">
+                            <div class="flex-1 flex mt-2 container max-w-full">
+                                <h1 class="mr-2 text-end">Qty:</h1>
+                                <input type="number" product_name="${product_name}" class="border pl-2 w-16 border-gray-300 rounded-md" value="1">
+                            </div>
+                            <h1 class="mt-2 font-bold">Price: ${product_price}</h1>
+                        </div>
+                    </div>
+                </div>`
+
+            document.querySelector('#product-container').appendChild(new_div)
+        }
     </script>
 {% endblock %}

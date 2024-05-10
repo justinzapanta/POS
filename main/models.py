@@ -13,7 +13,17 @@ class Products(models.Model):
         return self.product_name
     
 
-class Sales(models.Model):
-    sales_id = models.AutoField(primary_key=True)
-    sales_product = models.ForeignKey(Products, on_delete=models.CASCADE)
-    sales_date = models.CharField(max_length=250)
+class Orders(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    order_item = models.ForeignKey(Products, on_delete=models.CASCADE)
+    order_number = models.IntegerField()
+    order_item_total_price = models.IntegerField()
+    order_date = models.CharField(max_length=250)
+
+
+class Invoice(models.Model):
+    invoice_id = models.AutoField(primary_key=True)
+    invoice_number = models.IntegerField()
+    invoice_order_number = models.ForeignKey(Orders, on_delete=models.CASCADE)
+    invoice_total_price = models.IntegerField()
+    invoice_date = models.CharField(max_length=250)

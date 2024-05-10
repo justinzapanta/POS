@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Products, Sales
+from .models import Products
 
 # Create your views here.
 def dashboard(request):

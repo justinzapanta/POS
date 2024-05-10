@@ -38,7 +38,7 @@
                 <!--Products-->
                 <div class="container max-w-full mt-6 pr-80 pl-14 flex flex-wrap">
                     {% for product in products %}
-                        <a onclick="add_product(this)" product_name="{{product.product_name}}" product_price="{{product.product_price}}" class="hover:cursor-pointer w-60 h-60 mr-5 mb-6"><div class="container w-60 h-60 relative mr-2 shadow-lg border mb-6 border-gray-300 rounded-xl bg-white ml-4">
+                        <a onclick="add_product(this)" product_name="{{product.product_name}}" product_id="{{ product.product_id }}" product_price="{{product.product_price}}" class="hover:cursor-pointer w-60 h-60 mr-5 mb-6"><div class="container w-60 h-60 relative mr-2 shadow-lg border mb-6 border-gray-300 rounded-xl bg-white ml-4">
                             <div class="w-20 h-7 absolute rounded-tl-lg rounded-br-md top-0" style="background-color: rgba(0, 0, 0, 0.568);">
                                 <h1 class="font-bold text-center text-white">{{product.product_code}}</h1>
                             </div>
@@ -61,28 +61,36 @@
             <div class="container w-full px-2 mt-2 h-96 overflow-y-auto">
 
                 <div id="product-container" class="container max-w-full flex flex-col justify-center">
-
+                    <!--Dummy-->
+                    <div class="invoice-product" product-id="" product-price="0"></div>
                 </div>
 
             </div>
-
-            <h1 class="text-xl mt-2 ml-6 font-bold mb-2">Total: </h1>
+            <div class="flex">
+                <h1 class="text-xl mt-2 ml-6 font-bold mb-2">Total: </h1>
+                <p id="total-price" class="font-bold text-xl mt-2 ml-2">0</p>
+            </div>
             <div class="container max-w-full flex h-10 justify-center ">
-                <button class="px-20 rounded-lg font-bold bg-button text-white text-xl">Order</button>
+                <button onclick="order_button(this)" class="px-20 rounded-lg font-bold bg-button text-white text-xl">Order</button>
+                <h1 class="hidden invoice-product-price">0</h1>
             </div>
         </div>
 {% endblock %}
 
 {% block script %}
     <script>
+        const total_price = document.querySelector('#total-price')
+
         function add_product(_this){
             const product_name = _this.getAttribute('product_name')
             const product_price = _this.getAttribute('product_price')
+            const product_id = _this.getAttribute('product_id')
 
             let new_div = document.createElement('div')
-            new_div.classList.add('w-72', 'border-t', 'border-t-gray-300', 'pl-8', 'py-4')
+            new_div.classList.add('w-72', 'border-t', 'border-t-gray-300', 'pl-8', 'py-4', 'invoice-product')
             new_div.id = product_name
-
+            new_div.setAttribute('product-price', product_price)
+            new_div.setAttribute('product-id', product_id)
             new_div.innerHTML = `
                 <div class=" flex flex-col">
                     <h1 class="font-bold">${product_name}</h1>
@@ -90,14 +98,86 @@
                         <div class="flex container max-w-full">
                             <div class="flex-1 flex mt-2 container max-w-full">
                                 <h1 class="mr-2 text-end">Qty:</h1>
-                                <input type="number" product_name="${product_name}" class="border pl-2 w-16 border-gray-300 rounded-md" value="1">
+                                <input onblur="update_quantity(this)" type="number" product-name="${product_name}" class="border pl-2 w-16 border-gray-300 rounded-md" value="1">
                             </div>
-                            <h1 class="mt-2 font-bold">Price: ${product_price}</h1>
+
+                            <div class="flex mt-2">
+                                <h1 class="mt-2 font-bold">Price:</h1>
+                                <h1 id="invoice-product-price-${product_name}" class="mt-2 ml-2 font-bold invoice-product-price" product-price="${product_price}"> ${product_price}</h1>
+                            </div>
                         </div>
                     </div>
                 </div>`
 
-            document.querySelector('#product-container').appendChild(new_div)
+            const invoice_products = document.querySelectorAll('.invoice-product')
+            
+            let is_exist = false
+
+            invoice_products.forEach((product) => {
+                if (product_name == product.id){
+                    is_exist = true
+                }
+            })
+
+            if (!is_exist){
+                let total = 0
+                document.querySelectorAll('.invoice-product-price').forEach((price) => {
+                    total += parseInt(price.textContent)
+                })
+
+                document.querySelector('#product-container').appendChild(new_div)
+                total_price.innerHTML = (total + parseInt(product_price)).toLocaleString()
+                total_price.setAttribute('total-price', total + parseInt(product_price))
+            }
+        }
+
+
+        function update_quantity(_this){
+            if (parseInt(_this.value) <= 0 || !_this.value ){
+                document.querySelector(`#${_this.getAttribute('product-name')}`).remove()
+            }else{
+                let product_price = document.querySelector(`#invoice-product-price-${_this.getAttribute('product-name')}`)
+                product_price.textContent = parseInt(_this.value) * parseInt(product_price.getAttribute('product-price'))
+            }
+            
+            let total = 0
+            document.querySelectorAll('.invoice-product-price').forEach((price) => {
+                total += parseInt(price.textContent)
+            })
+
+            total_price.textContent = (total).toLocaleString()
+            total_price.setAttribute('total-price', total)
+
+        }
+
+
+        function order_button(_this){
+            const request = new XMLHttpRequest
+            request.open('POST', '/api/invoice/new-invoice')
+            request.setRequestHeader('Content-Type', 'application/json')
+
+            let data = []
+            document.querySelectorAll('.invoice-product').forEach((product) => {
+                if (product.id){
+                    let id = product.getAttribute('product-id')
+                    let product_total_price = document.querySelector(`#invoice-product-price-${product.id}`)
+                    data.push({
+                            'product_id' : parseInt(id),
+                            'total_price' : parseInt(total_price.getAttribute('total-price')),
+                            'product_total_price' : parseInt(product_total_price.textContent)
+                        })
+                }
+            })
+            
+            request.send(JSON.stringify({'data' : data}))
+
+            request.onloadend = () => {
+                document.querySelectorAll('.invoice-product').forEach((product) => {
+                    product.remove()
+                    total_price.textContent = 0
+                    total_price.setAttribute('total-price', 0)
+                })
+            }
         }
     </script>
 {% endblock %}

@@ -11,6 +11,7 @@ urlpatterns = [
 
     #Auth
     path('login/', views.login_view, name=('login')),
+    path('logout/', views.logout_view, name='logout'),
 
     #api
     path('api/invoice/new-invoice', order.new_invoice)

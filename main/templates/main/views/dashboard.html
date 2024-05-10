@@ -18,21 +18,21 @@
                 <div id="total-order" class="border border-gray-300 mb-5 shadow-md w-72 h-52 rounded-xl bg-white ml-4 mr-2">
                     <h1 class="mt-2 ml-2 font-bold">Total Product Sold</h1>
                     <div class="mt-10">
-                        <h1 class="container max-w-full flex justify-center text-5xl">0</h1>
+                        <h1 class="container max-w-full flex justify-center text-5xl">{{total_product_sold}}</h1>
                     </div>
                 </div>
 
                 <div id="total-order" class="border border-gray-300 mb-5 shadow-md w-72 h-52 rounded-xl bg-white ml-4 mr-2">
                     <h1 class="mt-2 ml-2 font-bold">Total Sales</h1>
                     <div class="mt-10">
-                        <h1 class="container max-w-full flex justify-center text-5xl">0</h1>
+                        <h1 id="total-sale" class="container max-w-full flex justify-center text-5xl">{{total_sale}}</h1>
                     </div>
                 </div>
 
                 <div id="total-order" class="border border-gray-300 mb-5 shadow-md w-72 h-52 rounded-xl bg-white ml-4 mr-2">
-                    <h1 class="mt-2 ml-2 font-bold">Total Cost</h1>
+                    <h1 class="mt-2 ml-2 font-bold">Total Orders</h1>
                     <div class="mt-10">
-                        <h1 class="container max-w-full flex justify-center text-5xl">0</h1>
+                        <h1 class="container max-w-full flex justify-center text-5xl">{{total_orders}}</h1>
                     </div>
                 </div>
             </div>
@@ -54,6 +54,7 @@
 
     <script>
         const ctx = document.getElementById('myChart');
+        const total_sale = document.querySelector('#total-sale')
 
         new Chart(ctx, {
           type: 'line',
@@ -61,7 +62,7 @@
             labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
               label: 'Total sale per month',
-              data: [10000, 50000, 30000, 70000, 900000],
+              data: [0, 0, 0, 0, parseInt(total_sale.textContent)],
               borderWidth: 1
             }]
           },

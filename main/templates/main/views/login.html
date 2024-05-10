@@ -1,1 +1,32 @@
 {% extends 'main/parts/base.html' %}
+
+
+{% block sidebar %}
+{% endblock %}
+
+{% block login %}
+{% endblock %}
+
+{% block content %}
+    <div class="container max-w-full h-screen flex flex-col justify-center">
+        <div class="container max-w-full flex justify-center">
+            <div class="container w-5/12 h-72 border border-gray-300 shadow-xl">
+                <h1 class="text-center text-2xl mt-4 font-bold">Sign In</h1>
+                <h1 class="text-red-400 text-lg text-center"></h1>
+                <form method="POST" class="container max-w-full">
+                    {% csrf_token %}
+
+                    <div class="container max-w-full flex justify-center">
+                        <div class="flex flex-col">
+                            <input placeholder="Username"  type="text" class="border mt-8 pl-2 border-gray-300 rounded-lg w-64 h-8" name="username" id="">
+                            <input placeholder="Password" type="password" class="border mt-5 pl-2 mb-7 border-gray-300 rounded-lg w-64 h-8" name="password" id="">
+                            <button class="text-white font-bold bg-slate-950 px-10 py-2 rounded-lg" type="submit">Sign In</button>
+                        
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

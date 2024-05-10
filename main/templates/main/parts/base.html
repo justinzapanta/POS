@@ -19,17 +19,19 @@
             <div class="flex mt-2">
                 <img src="{% static 'logo/pizza.png' %}" class="w-12  mr-3" alt="">
             </div>
-            <div>
-                <form method="POST" class="flex max-w-full">
-                    {% csrf_token %}
-                    <input type="text" class="rounded-xl mt-3 mr-2 border bg-white w-72  border-gray-300 px-2 py-2" placeholder="Search">
-                    <button type="submit" class="rounded-xl mt-3 px-3 py-1 font-bold bg-button text-white ">Search</button>
-                </form>
+        {% block login %}
+                <div>
+                    <form method="POST" class="flex max-w-full">
+                        {% csrf_token %}
+                        <input type="text" class="rounded-xl mt-3 mr-2 border bg-white w-72  border-gray-300 px-2 py-2" placeholder="Search">
+                        <button type="submit" class="rounded-xl mt-3 px-3 py-1 font-bold bg-button text-white ">Search</button>
+                    </form>
+                </div>
             </div>
-        </div>
-        <ul class="mt-5 text-xl">
-            <li><a href="#">Logout</a></li>
-        </ul>
+            <ul class="mt-5 text-xl">
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        {% endblock %}
     </header>
 
     <div class="container max-w-full flex relative">

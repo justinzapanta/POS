@@ -23,7 +23,6 @@ class Orders(models.Model):
 
 class Invoice(models.Model):
     invoice_id = models.AutoField(primary_key=True)
-    invoice_number = models.IntegerField()
-    invoice_order_number = models.ForeignKey(Orders, on_delete=models.CASCADE)
+    invoice_order_number = models.IntegerField()
     invoice_total_price = models.IntegerField()
     invoice_date = models.CharField(max_length=250)

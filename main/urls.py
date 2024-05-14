@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.dashboard, name=('dashboard')),
     path('products/<str:category>/', views.products, name=('products')),
+    path('inventory/', views.inventory, name="inventory"),
 
     #Auth
     path('login/', views.login_view, name=('login')),

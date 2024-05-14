@@ -23,10 +23,14 @@ def dashboard(request):
         return render(request, 'main/views/dashboard.html', data)
     return redirect('login')
 
+
 def products(request, category):
     if request.user.is_authenticated:
         categories = Products.objects.values('product_category').distinct()
-        products = Products.objects.filter(product_category=str(category).title())
+        products = Products.objects.filter(
+                product_category=str(category).title(), 
+                product_quantity__gt=0,
+            )
 
         data = {
                 'categories' : categories,
@@ -58,3 +62,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+def inventory(request):
+    return render(request, 'main/views/inventory.html')

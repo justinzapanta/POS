@@ -1,0 +1,98 @@
+{% extends 'main/parts/base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %} Products {% endblock %}
+
+{% block body %}
+    <div class="bg-slate-100">
+{% endblock %}
+
+
+{% block content %}
+    <div class="mt-28 container max-w-full px-10">
+        <table class="container max-w-full bg-white rounded-lg">
+            <tr class="bg-gray-400 rounded-lg">
+                <th class="rounded-tl-lg py-3">ingredient Name</th>
+                <th>Status</th>
+                <th>Total Quantity</th>
+                <th>Unit</th>
+                <th class="rounded-tr-lg"></th>
+            </tr>
+            <tr class="text-center">
+                <td class="py-2 pl-2 truncate container w-96"><h1 class="truncate w-96">All-purpose flour</h1></td>
+                <td>Available</td>
+                <td>50</td>
+                <td>kg</td>
+                <td><button>View</button></td>
+            </tr>
+
+            <tr class="text-center bg-gray-200">
+                <td class="py-2 truncate container w-96"><h1 class="truncate w-96">Sugar</h1></td>
+                <td>Available</td>
+                <td>30</td>
+                <td>kg</td>
+                <td><button>View</button></td>
+            </tr>
+            <tr class="text-center">
+                <td class="py-2">All-purpose flour</td>
+                <td>Available</td>
+                <td>50</td>
+                <td>kg</td>
+                <td><button>View</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="absolute container max-w-full h-screen flex flex-col justify-center" style="background-color: rgba(0, 0, 0, 0.486);">
+        <div class="container max-w-full flex justify-center">
+            <div class="w-8/12 h-96 bg-white rounded-xl shadow-md">
+                <div class="bg-gray-500 py-2 rounded-t-xl relative">
+                    <h1 class="text-white text-2xl text-center ">Flour</h1>
+                    <a href="#" class="absolute right-4 top-2 text-2xl text-white">X</a>
+                </div>
+
+                <table class="container max-w-full bg-white">
+                    <tr class="bg-gray-400">
+                        <th class="py-3">ingredient Name</th>
+                        <th>Status</th>
+                        <th>Total Quantity</th>
+                        <th>Unit</th>
+                        <th class=""></th>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="py-2 pl-2 truncate container w-96"><h1 class="truncate w-96">All-purpose flour</h1></td>
+                        <td>Available</td>
+                        <td>50</td>
+                        <td>kg</td>
+                        <td><button>View</button></td>
+                    </tr>
+        
+                    <tr class="text-center bg-gray-200">
+                        <td class="py-2 truncate container w-96"><h1 class="truncate w-96">Sugar</h1></td>
+                        <td>Available</td>
+                        <td>30</td>
+                        <td>kg</td>
+                        <td><button>View</button></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="py-2">All-purpose flour</td>
+                        <td>Available</td>
+                        <td>50</td>
+                        <td>kg</td>
+                        <td><button>View</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+
+    </script>
+{% endblock %}

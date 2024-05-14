@@ -11,6 +11,11 @@
     <div class="bg-slate-100">
 {% endblock %}
 
+{% block list %}
+    <li class="mr-4"><a href="{% url 'dashboard' %}">Order History</a></li>
+    <li class="mr-4"><a href="{% url 'inventory' %}">Inventory</a></li>
+    <li class="mr-4"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+{% endblock %}
 
 {% block sidebar %}
 {% endblock %}
@@ -47,6 +52,8 @@
                             </div>
                             <div class="container max-w-full px-2">
                                 <h1 class="text-center mt-2 font-bold">{{ product.product_name }}</h1>
+
+                                <h1 class=" mt-2 absolute bottom-2 left-4 font-bold">Qty:; {{ product.product_quantity }}</h1>
                                 <h1 class=" mt-2 absolute bottom-2 right-4 font-bold">P{{ product.product_price }}</h1>
                             </div>
                         </div></a>

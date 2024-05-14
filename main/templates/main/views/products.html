@@ -12,9 +12,9 @@
 {% endblock %}
 
 {% block list %}
-    <li class="mr-4"><a href="{% url 'dashboard' %}">Order History</a></li>
-    <li class="mr-4"><a href="{% url 'inventory' %}">Inventory</a></li>
-    <li class="mr-4"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li class="mr-8"><a href="{% url 'dashboard' %}">Order History</a></li>
+    <li class="mr-8"><a href="{% url 'inventory' %}">Inventory</a></li>
+    <li class="mr-8"><a href="{% url 'dashboard' %}">Dashboard</a></li>
 {% endblock %}
 
 {% block sidebar %}
@@ -52,8 +52,6 @@
                             </div>
                             <div class="container max-w-full px-2">
                                 <h1 class="text-center mt-2 font-bold">{{ product.product_name }}</h1>
-
-                                <h1 class=" mt-2 absolute bottom-2 left-4 font-bold">Qty:; {{ product.product_quantity }}</h1>
                                 <h1 class=" mt-2 absolute bottom-2 right-4 font-bold">P{{ product.product_price }}</h1>
                             </div>
                         </div></a>
@@ -99,13 +97,14 @@
             new_div.setAttribute('product-price', product_price)
             new_div.setAttribute('product-id', product_id)
             new_div.innerHTML = `
-                <div class=" flex flex-col">
+                <div class=" flex flex-col relative">
                     <h1 class="font-bold">${product_name}</h1>
+                    <a onclick="delete_item(this)" product-name="${product_name}" class="hover:cursor-pointer font-bold absolute right-2">X</a>
                     <div>
                         <div class="flex container max-w-full">
-                            <div class="flex-1 flex mt-2 container max-w-full">
+                            <div class="flex-1 flex mt-2 container max-w-full ">
                                 <h1 class="mr-2 text-end">Qty:</h1>
-                                <input onblur="update_quantity(this)" type="number" product-name="${product_name}" class="border pl-2 w-16 border-gray-300 rounded-md" value="1">
+                                <input id="input-quantity-${product_name}" onblur="update_quantity(this)" type="number" product-name="${product_name}" class="border pl-2 w-16 border-gray-300 rounded-md" value="1">
                             </div>
 
                             <div class="flex mt-2">
@@ -157,6 +156,10 @@
 
         }
 
+        function delete_item(_this){
+            document.querySelector(`#${_this.getAttribute('product-name')}`).remove()
+        }
+
 
         function order_button(_this){
             const request = new XMLHttpRequest
@@ -168,10 +171,12 @@
                 if (product.id){
                     let id = product.getAttribute('product-id')
                     let product_total_price = document.querySelector(`#invoice-product-price-${product.id}`)
+                    let product_quantity = document.querySelector(`#input-quantity-${product.id}`)
                     data.push({
                             'product_id' : parseInt(id),
                             'total_price' : parseInt(total_price.getAttribute('total-price')),
-                            'product_total_price' : parseInt(product_total_price.textContent)
+                            'product_total_price' : parseInt(product_total_price.textContent),
+                            'quantity' : product_quantity.value
                         })
                 }
             })

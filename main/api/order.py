@@ -20,6 +20,7 @@ def new_invoice(request):
                         order_item=product_instance,
                         order_item_total_price=int(product['product_total_price']),
                         order_number=order_number,
+                        order_item_quantity=product['quantity'],
                         order_date=today,
                     )
                 orders.save()

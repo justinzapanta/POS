@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Orders, Invoice, Products
+from .models import Orders, Invoice, Products, Ingredients
 from django.db.models import Sum
 from django.contrib.auth import authenticate, login, logout
 
@@ -23,14 +23,10 @@ def dashboard(request):
         return render(request, 'main/views/dashboard.html', data)
     return redirect('login')
 
-
 def products(request, category):
     if request.user.is_authenticated:
         categories = Products.objects.values('product_category').distinct()
-        products = Products.objects.filter(
-                product_category=str(category).title(), 
-                product_quantity__gt=0,
-            )
+        products = Products.objects.filter(product_category=str(category).title())
 
         data = {
                 'categories' : categories,
@@ -65,4 +61,6 @@ def logout_view(request):
 
 
 def inventory(request):
-    return render(request, 'main/views/inventory.html')
+    data = {}
+    ingredients = Ingredients.objects.all()
+    return render(request, 'main/views/inventory.html', { 'ingredients' : ingredients})

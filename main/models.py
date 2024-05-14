@@ -6,7 +6,6 @@ class Products(models.Model):
     product_name = models.CharField(max_length=250)
     product_code = models.CharField(max_length=50)
     product_price = models.FloatField()
-    product_quantity = models.IntegerField()
     product_img = models.ImageField(upload_to='./main/static/product-img', default=None)
     product_category = models.CharField(max_length=250)
 
@@ -22,10 +21,15 @@ class Ingredients(models.Model):
     ingredient_arrive_date = models.CharField(max_length=250)
     ingredient_expiration_date = models.CharField(max_length=250)
 
+    def __str__ (self):
+        return self.ingredient_name
+
 
 class Products_Ingredients(models.Model):
     product_ingredient = models.AutoField(primary_key=True)
     product_ingredient_product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    product_ingredient_quantity = models.FloatField()
+    product_ingredient_unit = models.CharField(max_length=250)
     product_ingredient_ingredient = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
 
 

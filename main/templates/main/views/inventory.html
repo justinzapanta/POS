@@ -42,52 +42,19 @@
                     <td>Available</td>
                     <td>{{ ingredient.ingredient_quantity }}</td>
                     <td>{{ ingredient.ingredient_unit }}</td>
-                    <td><button>View</button></td>
+                    <td><button onclick="view_button(this)" id="{{ ingredient.ingredient_name }}">View</button></td>
                 </tr>
             {% endfor %}
         </table>
     </div>
 
-    <div class="container max-w-full absolute hidden">
+
+    
+    <div id="modal-ingredient-info" class="container max-w-full absolute hidden">
         <div class="container max-w-full h-screen flex flex-col justify-center" style="background-color: rgba(0, 0, 0, 0.486);">
             <div class="container max-w-full flex justify-center">
-                <div class="w-8/12 h-96 bg-white rounded-xl shadow-md">
-                    <div class="bg-gray-500 py-2 rounded-t-xl relative">
-                        <h1 class="text-white text-2xl text-center ">Flour</h1>
-                        <a href="#" class="absolute right-4 top-2 text-2xl text-white">X</a>
-                    </div>
+                <div id="modal-content" class="w-8/12 h-96 bg-white rounded-xl shadow-md">
 
-                    <table class="container max-w-full bg-white">
-                        <tr class="bg-gray-400">
-                            <th>Status</th>
-                            <th>Total Quantity</th>
-                            <th>Unit</th>
-                            <th>Expiration Date</th>
-                            <th class=""></th>
-                        </tr>
-                        <tr class="text-center">
-                            <td>Available</td>
-                            <td>50</td>
-                            <td>kg</td>
-                            <td>15/12/2026</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-            
-                        <tr class="text-center bg-gray-200">
-                            <td>Available</td>
-                            <td>30</td>
-                            <td>kg</td>
-                            <td>15/12/2026</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td>Available</td>
-                            <td>50</td>
-                            <td>kg</td>
-                            <td>15/12/2026</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                    </table>
                 </div>
             </div>
         </div>
@@ -96,6 +63,69 @@
 
 {% block script %}
     <script>
+        function view_button(_this){
+            const request = new XMLHttpRequest
+            request.open('POST', '/api/inventory/get-data/')
+            request.setRequestHeader('Content-Type', 'application/json')
+            request.send(JSON.stringify({ 'ingredient_name' : _this.id }))
 
+            let table_data = ``
+            request.onloadend = async () => {
+                const ingredients = await JSON.parse(request.responseText)
+                
+                let count = 1 
+                ingredients['ingredient_list'].forEach((ingredient) => {
+                    let tr = ''
+                    if (count == 1){
+                        tr = '<tr class="text-center">'
+                            count = 2
+                    }else{
+                        tr = '<tr class="text-center bg-gray-300">'
+                        count = 1
+                    }
+
+                    html_code = `
+                        ${tr}
+                            <td>${ingredient.ingredient_quantity}</td>
+                            <td>${ingredient.unit}</td>
+                            <td>${ingredient.expiration_date}</td>
+                            <td><button>Edit</button></td>
+                        </tr>
+
+                    `
+                    table_data += html_code
+                })
+
+
+                const modal = document.createElement('div')
+                modal.id = 'modal-table'
+                modal.innerHTML = `
+                    <div class="bg-gray-500 py-2 rounded-t-xl relative">
+                        <h1 class="text-white text-2xl text-center ">${_this.id}</h1>
+                        <a onclick="close_table()" class="absolute right-4 top-2 text-2xl text-white hover:cursor-pointer">X</a>
+                    </div>
+
+                    <table class="container max-w-full bg-white">
+                        <tr class="bg-gray-500 text-white">
+                            <th>Total Quantity</th>
+                            <th>Unit</th>
+                            <th>Expiration Date</th>
+                            <th class=""></th>
+                        </tr>
+                        ${table_data}
+                    </table>
+                `
+
+                const modal_content = document.querySelector('#modal-content')
+                modal_content.appendChild(modal)
+                document.querySelector('#modal-ingredient-info').style.display = 'block'
+                console.log('wow')
+            }
+        }
+
+        function close_table(){
+            document.querySelector('#modal-ingredient-info').style.display = 'none'
+            document.querySelector('#modal-table').remove()
+        }
     </script>
 {% endblock %}

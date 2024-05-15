@@ -163,7 +163,7 @@
 
         function order_button(_this){
             const request = new XMLHttpRequest
-            request.open('POST', '/api/invoice/new-invoice')
+            request.open('POST', '/api/invoice/new-invoice/')
             request.setRequestHeader('Content-Type', 'application/json')
 
             let data = []

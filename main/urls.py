@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
-from .api import order, inventory
-
+from .api import order, inventory, ingredients
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -16,5 +15,6 @@ urlpatterns = [
 
     #api
     path('api/invoice/new-invoice/', order.new_invoice),
-    path('api/inventory/get-data/', inventory.get_ingredient)
+    path('api/inventory/get-data/', inventory.get_ingredient),
+    path('api/ingredients/update/', ingredients.update_ingredient),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

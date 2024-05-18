@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Orders, Invoice, Products, Ingredients
-from django.db.models import Sum
+from django.db.models import Sum, Subquery, OuterRef
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
@@ -61,6 +61,21 @@ def logout_view(request):
 
 
 def inventory(request):
-    data = {}
-    ingredients = Ingredients.objects.all()
-    return render(request, 'main/views/inventory.html', { 'ingredients' : ingredients})
+    name_list = Ingredients.objects.values_list('ingredient_name', flat=True).order_by('ingredient_name').distinct()
+
+    ingredients_list = []
+    pagination_num = 1
+    for num, name in enumerate(name_list):
+        ingredients = Ingredients.objects.filter(ingredient_name=name).annotate(total_quantity=Sum('ingredient_quantity'))
+        ingredients_list.append({
+                'ingredient_name' : ingredients[0].ingredient_name,
+                'ingredient_total_quantity' : ingredients[0].total_quantity,
+                'ingredient_unit' : ingredients[0].ingredient_unit,
+                'pagination_num' : pagination_num
+            })
+        
+        if ((num + 1) % 10 ) == 0:
+            pagination_num += 1
+        print(pagination_num, num)
+
+    return render(request, 'main/views/inventory.html', { 'ingredients' : ingredients_list})

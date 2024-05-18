@@ -15,7 +15,7 @@
 
 
 {% block content %}
-    <div class="mt-28 container max-w-full px-10">
+    <div class="mt-20 container max-w-full px-10">
         <div class="container max-w-full">
             <form action="" class="flex">
                 {% csrf_token %}
@@ -33,24 +33,47 @@
                 <th class="rounded-tr-lg"></th>
             </tr>
             {% for ingredient in ingredients %}
-                {% if forloop.counter|modulo == 0 %}
-                    <tr class="text-center bg-gray-300">
+                {% if forloop.counter|modulo == 0 and ingredient.pagination_num == 1 %}
+                    <tr id="pg-{{ingredient.pagination_num}}" class="text-center bg-gray-300">
+                        <td class="py-2 pl-2 truncate container w-96"><h1 class="truncate w-96">{{ ingredient.ingredient_name }}</h1></td>
+                        <td>Available</td>
+                        <td>{{ ingredient.ingredient_total_quantity }}</td>
+                        <td>{{ ingredient.ingredient_unit }}</td>
+                        <td><button onclick="view_button(this)" id="{{ ingredient.ingredient_name }}">View</button></td>
+                    </tr>
+                {% elif forloop.counter|modulo == 1 and ingredient.pagination_num == 1 %}
+                    <tr id="pg-{{ingredient.pagination_num}}" class="text-center">
+                        <td class="py-2 pl-2 truncate container w-96"><h1 class="truncate w-96">{{ ingredient.ingredient_name }}</h1></td>
+                        <td>Available</td>
+                        <td>{{ ingredient.ingredient_total_quantity }}</td>
+                        <td>{{ ingredient.ingredient_unit }}</td>
+                        <td><button onclick="view_button(this)" id="{{ ingredient.ingredient_name }}">View</button></td>
+                    </tr>
+                {% elif forloop.counter|modulo == 0 %}
+                    <tr id="pg-{{ingredient.pagination_num}}" class="text-center bg-gray-300 hidden">
+                        <td class="py-2 pl-2 truncate container w-96"><h1 class="truncate w-96">{{ ingredient.ingredient_name }}</h1></td>
+                        <td>Available</td>
+                        <td>{{ ingredient.ingredient_total_quantity }}</td>
+                        <td>{{ ingredient.ingredient_unit }}</td>
+                        <td><button onclick="view_button(this)" id="{{ ingredient.ingredient_name }}">View</button></td>
+                    </tr>
                 {% else %}
-                    <tr class="text-center">
+                    <tr id="pg-{{ingredient.pagination_num}}" class="text-center hidden">
+                        <td class="py-2 pl-2 truncate container w-96"><h1 class="truncate w-96">{{ ingredient.ingredient_name }}</h1></td>
+                        <td>Available</td>
+                        <td>{{ ingredient.ingredient_total_quantity }}</td>
+                        <td>{{ ingredient.ingredient_unit }}</td>
+                        <td><button onclick="view_button(this)" id="{{ ingredient.ingredient_name }}">View</button></td>
+                    </tr>
                 {% endif %}
-                    <td class="py-2 pl-2 truncate container w-96"><h1 class="truncate w-96">{{ ingredient.ingredient_name }}</h1></td>
-                    <td>Available</td>
-                    <td>{{ ingredient.ingredient_quantity }}</td>
-                    <td>{{ ingredient.ingredient_unit }}</td>
-                    <td><button onclick="view_button(this)" id="{{ ingredient.ingredient_name }}">View</button></td>
-                </tr>
+
             {% endfor %}
         </table>
     </div>
 
 
     
-    <div id="modal-ingredient-info" class="container max-w-full absolute hidden">
+    <div id="modal-ingredient-info" class="container max-w-full absolute top-16 hidden">
         <div class="container max-w-full h-screen flex flex-col justify-center" style="background-color: rgba(0, 0, 0, 0.486);">
             <div class="container max-w-full flex justify-center">
                 <div id="modal-content" class="w-8/12 h-96 bg-white rounded-xl shadow-md">
@@ -59,6 +82,55 @@
             </div>
         </div>
     </div>
+
+
+    <!--Edit Ingredient data-->
+    <div id="edit-ingredient" class="container max-w-full absolute top-16 hidden">
+        <div class="container max-w-full h-screen flex flex-col justify-center" style="background-color: rgba(0, 0, 0, 0.486);">
+            <div class="container max-w-full flex justify-center">
+                <div class="w-4/12 bg-white relative" >
+                    <a onclick="close_table('edit')" class="text-xl font-bold absolute top-2 right-2 hover:cursor-pointer">X</a>
+                    <h1 class="text-2xl font-bold text-center mt-5">Ingredient</h1>
+                    <form>
+                        <div class="container max-w-full flex justify-center mt-5">
+                            <div class="container max-w-full flex flex-col w-7/12">
+                                <div class="font-bold">
+                                    <h1>Ingredient Name</h1>
+                                </div>
+                                <input id="ingredient-name" type="text" class="border border-gray-300 rounded-md h-8 pl-2">
+                            </div>
+                        </div>
+                        <div class="container max-w-full flex justify-center mt-5">
+                            <div class="container max-w-full flex flex-col w-7/12">
+                                <div class="font-bold">
+                                    <h1>Quantity</h1>
+                                </div>
+                                <input id="ingredient-quantity" type="number" class="border border-gray-300 rounded-md h-8 pl-2">
+                            </div>
+                        </div>
+                        <div class="container max-w-full flex justify-center mt-5">
+                            <div class="container max-w-full flex flex-col w-7/12">
+                                <div class="font-bold">
+                                    <h1>Unit</h1>
+                                </div>
+                                <input id="ingredient-unit" type="text" class="border border-gray-300 rounded-md h-8 pl-2">
+                            </div>
+                        </div>
+                        <div class="container max-w-full flex justify-center mt-5">
+                            <div class="container max-w-full flex flex-col w-7/12">
+                                <div class="font-bold">
+                                    <h1>Expiration Date</h1>
+                                </div>
+                                <input id="ingredient-date" type="text" class="border border-gray-300 rounded-md h-8 pl-2">
+                            </div>
+                        </div>
+                        <p class="text-center"><button type="button" onclick="edit_ingredient_button(this)" class="w-32 mt-8 mb-10 text-white font-bold h-8 bg-button rounded-lg">Edit</button></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block script %}
@@ -89,9 +161,8 @@
                             <td>${ingredient.ingredient_quantity}</td>
                             <td>${ingredient.unit}</td>
                             <td>${ingredient.expiration_date}</td>
-                            <td><button>Edit</button></td>
+                            <td><button onclick="edit_ingredient(this)" ingredient-id="${ingredient.ingredient_id}"  ingredient-unit="${ingredient.unit}" ingredient-date="${ingredient.expiration_date}"  ingredient-quantity="${ingredient.ingredient_quantity}" id="${_this.id}">Edit</button></td>
                         </tr>
-
                     `
                     table_data += html_code
                 })
@@ -119,13 +190,50 @@
                 const modal_content = document.querySelector('#modal-content')
                 modal_content.appendChild(modal)
                 document.querySelector('#modal-ingredient-info').style.display = 'block'
-                console.log('wow')
             }
         }
 
-        function close_table(){
-            document.querySelector('#modal-ingredient-info').style.display = 'none'
-            document.querySelector('#modal-table').remove()
+        function close_table(div='view-table'){
+            if (div == 'view-table'){
+                document.querySelector('#modal-ingredient-info').style.display = 'none'
+                document.querySelector('#modal-table').remove()
+            }else{
+                document.querySelector('#modal-ingredient-info').style.display = 'block'
+                document.querySelector('#edit-ingredient').style.display = 'none'
+            }
+        }
+
+        let name = document.querySelector('#ingredient-name')
+        let quantity = document.querySelector('#ingredient-quantity')
+        let date = document.querySelector('#ingredient-date')
+        let unit = document.querySelector('#ingredient-unit')
+        let ingredient_id
+        let new_date
+
+        function edit_ingredient(_this){
+            document.querySelector('#edit-ingredient').style.display = 'block'
+
+            new_date = _this.getAttribute('ingredient-date')
+            ingredient_id = _this.getAttribute('ingredient-id')
+
+            name.value = _this.id
+            quantity.value = _this.getAttribute('ingredient-quantity')
+            date.value = _this.getAttribute('ingredient-date')
+            unit.value = _this.getAttribute('ingredient-unit')
+        }
+
+        function edit_ingredient_button(_this){
+            const request = new XMLHttpRequest()
+            request.open('POST', '/api/ingredients/update/')
+            request.setRequestHeader('Content-Type', 'application/json')
+            request.send(JSON.stringify({
+                id : ingredient_id,
+                new_name : name.value,
+                quantity : parseInt(quantity.value),
+                unit : unit.value,
+                new_date : date.value,
+                date : new_date,
+            }))
         }
     </script>
 {% endblock %}

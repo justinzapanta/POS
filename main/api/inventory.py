@@ -13,7 +13,8 @@ def get_ingredient(request):
         ingredient_list.append({
                 'ingredient_quantity' : gredient.ingredient_quantity,
                 'unit' : gredient.ingredient_unit,
-                'expiration_date' : gredient.ingredient_expiration_date
+                'expiration_date' : gredient.ingredient_expiration_date,
+                'ingredient_id' : gredient.ingredient_id
             }
          )
     
